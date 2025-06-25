@@ -1,0 +1,10 @@
+name: Github Actions Bash Wrapper
+description: Setup a bash wrapper to capture the stdout and stderr outputs
+runs:
+  using: composite
+  steps:
+    - name: Setup Wrapper
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+      run: echo "${GITHUB_ACTION_PATH}/bin" >> "${GITHUB_PATH}"
+      shell: bash

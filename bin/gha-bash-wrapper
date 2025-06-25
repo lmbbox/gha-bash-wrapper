@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+delimiter="$(openssl rand -hex 32)"
+echo "stdouterr<<${delimiter}" >> "${GITHUB_OUTPUT}"
+trap 'rc=$?; echo "${delimiter}" >> "${GITHUB_OUTPUT}"; exit $rc' EXIT
+bash -eo pipefail "${1}" 2>&1 | tee -a "${GITHUB_OUTPUT}"
